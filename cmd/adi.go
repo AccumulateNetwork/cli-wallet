@@ -20,6 +20,13 @@ var adiCmd = &cobra.Command{
 					fmt.Println("Usage:")
 					PrintADIGet()
 				}
+			case "public":
+				if len(args) > 1 {
+					PublicADI(args[1])
+				} else {
+					fmt.Println("Usage:")
+					PrintADIPublic()
+				}
 			case "create":
 				if len(args) > 1 {
 					NewADI(args[1])
@@ -51,7 +58,11 @@ func init() {
 }
 
 func PrintADIGet() {
-	fmt.Println("  accumulate adi get [URL]			Get existing ADI from database")
+	fmt.Println("  accumulate adi get [URL]			Get existing ADI by URL")
+}
+
+func PrintADIPublic() {
+	fmt.Println("  accumulate adi public [URL]			Print public key hash for chosen ADI")
 }
 
 func PrintADICreate() {
@@ -64,12 +75,17 @@ func PrintADIImport() {
 
 func PrintADI() {
 	PrintADIGet()
+	PrintADIPublic()
 	PrintADICreate()
 	PrintADIImport()
 }
 
 func GetADI(url string) {
-	fmt.Println("Getting ADI " + url + " from local DB")
+	fmt.Println("Getting ADI " + url)
+}
+
+func PublicADI(url string) {
+	fmt.Println("Public key hash of ADI " + url)
 }
 
 func NewADI(url string) {
